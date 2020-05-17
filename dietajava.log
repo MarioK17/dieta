@@ -1,0 +1,126 @@
+  LINGO/WIN64 14.0.1.58 (13 May 14)
+ 
+  LINDO API 8.0.1694.532 (May 13 2014 02:23:26)
+ 
+  Copyright (C) 2011-2013 LINDO Systems Inc. Licensed material,
+  all rights reserved. Copying except as authorized in license
+  agreement is prohibited.
+ 
+  License location: D:\Descargas\Lingo\Lingo P\lndlng14.lic
+  Config  location: D:\Descargas\Lingo\Lingo P\LINGO.CNF
+ 
+  Eval Use Only
+ 
+  License expires: 20 May 2015
+ 
+  Licensed for commercial use.
+  Branch-and-bound solver enabled.
+  Nonlinear solver enabled.
+  Barrier solver enabled.
+  Global solver enabled.
+  Integer solver enabled.
+  Stochastic solver enabled.
+  Conic solver enabled.
+ 
+ 
+   Parameter        Old Value     New Value
+    ECHOIN             0             1
+ 
+: TAKE DIETAJAVA.LNG
+: MODEL:
+? SETS:
+? NUTRIENTES :REQUERIDO;
+? ALIMENTOS :COSTO, CANTIDAD;
+? COMIDA (NUTRIENTES, ALIMENTOS): APORTE;
+? ENDSETS
+? [OBJECTIVE] MIN = @SUM(ALIMENTOS(J): COSTO(J)*CANTIDAD(J));
+? @FOR(NUTRIENTES(I):
+?  @SUM(ALIMENTOS(J): APORTE(I,J)*CANTIDAD(J))>=REQUERIDO(I));
+? DATA:
+? NUTRIENTES = @POINTER(1);
+? REQUERIDO = @POINTER(2);
+? ALIMENTOS = @POINTER(3);
+? COSTO = @POINTER(4);
+? @POINTER(5) = CANTIDAD;
+? APORTE = @POINTER(6);
+? @POINTER(7) = @STATUS();
+? ENDDATA
+? END
+: LOOK ALL
+ 
+ 1]
+ 2]SETS:
+ 3]
+ 4]NUTRIENTES :REQUERIDO;
+ 5]
+ 6]ALIMENTOS :COSTO, CANTIDAD;
+ 7]
+ 8]COMIDA (NUTRIENTES, ALIMENTOS): APORTE;
+ 9]
+10]ENDSETS
+11]
+12][OBJECTIVE] MIN = @SUM(ALIMENTOS(J): COSTO(J)*CANTIDAD(J));
+13]
+14]@FOR(NUTRIENTES(I):
+15] @SUM(ALIMENTOS(J): APORTE(I,J)*CANTIDAD(J))>=REQUERIDO(I));
+16]
+17]DATA:
+18]
+19]NUTRIENTES = @POINTER(1);
+20]REQUERIDO = @POINTER(2);
+21]ALIMENTOS = @POINTER(3);
+22]COSTO = @POINTER(4);
+23]@POINTER(5) = CANTIDAD;
+24]APORTE = @POINTER(6);
+25]@POINTER(7) = @STATUS();
+26]
+27]ENDDATA
+28]
+ 
+: GO
+  Compiling model ...
+  Structural analysis, pass 1 ...
+  Scalarizing model ...
+  Generating nonzero matrix ...
+  Solving ...
+ 
+  Global optimal solution found.
+  Objective value:                              1.000000
+  Infeasibilities:                              0.000000
+  Total solver iterations:                             0
+  Elapsed runtime seconds:                          0.00
+ 
+  Running output operations ...
+ 
+  Model Class:                                        LP
+ 
+  Total variables:                      2
+  Nonlinear variables:                  0
+  Integer variables:                    0
+ 
+  Total constraints:                    3
+  Nonlinear constraints:                0
+ 
+  Total nonzeros:                       6
+  Nonlinear nonzeros:                   0
+ 
+ 
+ 
+                                Variable           Value        Reduced Cost
+                         REQUERIDO( QQQ)        3.000000            0.000000
+                         REQUERIDO( WWW)        3.000000            0.000000
+                             COSTO( WWW)        1.000000            0.000000
+                             COSTO( EEE)        1.000000            0.000000
+                          CANTIDAD( WWW)        0.000000            0.000000
+                          CANTIDAD( EEE)        1.000000            0.000000
+                       APORTE( QQQ, WWW)        3.000000            0.000000
+                       APORTE( QQQ, EEE)        3.000000            0.000000
+                       APORTE( WWW, WWW)        3.000000            0.000000
+                       APORTE( WWW, EEE)        3.000000            0.000000
+ 
+                                     Row    Slack or Surplus      Dual Price
+                               OBJECTIVE        1.000000           -1.000000
+                                       2        0.000000          -0.3333333
+                                       3        0.000000            0.000000
+ 
+: QUIT
